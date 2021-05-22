@@ -44,7 +44,7 @@
             {% csrf_token %}
             <select name="book">
                 <option value="">- Select a Book -</option>
-                {% for book in all_books %}
+                {% for book in remaining_books %}
                     <option value="{{book.id}}">{{book.title}}</option>
                 {% endfor %}
             </select>

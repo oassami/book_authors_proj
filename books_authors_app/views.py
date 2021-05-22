@@ -50,28 +50,30 @@ def add_auth_book(request, book_id):
     the_author = Author.objects.get(id=request.POST['author'])
     if request.method=="POST":
         the_author.books.add(this_book)
-    the_authors = this_book.authors.all()
-    remaining_authors = Author.objects.exclude(id__in=the_authors)
-    for x in remaining_authors:
-        print(x.id, x.first_name)
-    context={
-        'this_book': this_book,
-        'the_authors': the_authors,
-        'remaining_authors': remaining_authors,
-    }
-    return render(request, 'display.html', context)
+    # the_authors = this_book.authors.all()
+    # remaining_authors = Author.objects.exclude(id__in=the_authors)
+    # for x in remaining_authors:
+    #     print(x.id, x.first_name)
+    # context={
+    #     'this_book': this_book,
+    #     'the_authors': the_authors,
+    #     'remaining_authors': remaining_authors,
+    # }
+    return redirect(f'/book/{book_id}')
+    # return render(request, 'display.html', context)
 
 def add_book_auth(request, author_id):
     this_author = Author.objects.get(id=author_id)
     the_book = Book.objects.get(id=request.POST['book'])
     if request.method=="POST":
         the_book.authors.add(this_author)
-    the_books = this_author.books.all()
-    all_books = Book.objects.all()
-    remaining_books = Book.objects.exclude(id__in=the_books)
-    context={
-        'this_author': this_author,
-        'the_books': the_books,
-        'remaining_authors': remaining_books,
-    }
-    return render(request, 'display.html', context)
+    # the_books = this_author.books.all()
+    # all_books = Book.objects.all()
+    # remaining_books = Book.objects.exclude(id__in=the_books)
+    # context={
+    #     'this_author': this_author,
+    #     'the_books': the_books,
+    #     'remaining_authors': remaining_books,
+    # }
+    return redirect(f'/author/{author_id}')
+    # return render(request, 'display.html', context)
