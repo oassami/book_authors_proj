@@ -1,12 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=P, initial-scale=1.0">
-    <title>Document</title>
+    <title>Books & Authors</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
+
 <body>
-    <p>This is working...</p>
+    <div id="wrapper">
+        {% if all_books %}
+            <h3>Add a Book</h3>
+            <div class="add">
+                <form action="/add_book" method="POST">
+                    {% csrf_token %}
+                    <p>Title: </p>
+                    <input type="text" name="title"><br>
+                    <p>Description: </p>
+                    <textarea name="desc" id="desc"></textarea><br>
+                    <input class="submit_it" type="submit" value="Add">
+                </form>
+            </div>
+            <div class="all">
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for book in all_books %}
+                    <tr>
+                        <td>{{book.id}}</td>
+                        <td>{{book.title}}</td>
+                        <td><a href="/book/{{book.id}}">View</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <a id="link_it" href="authors">Go to Authors...</a>
+            </div>
+        {% else %}
+            <h3>Add a Author</h3>
+            <div class="add">
+                <form action="/add_author" method="POST">
+                    {% csrf_token %}
+                    <p>First Name: </p>
+                    <input type="text" name="f_name"><br>
+                    <p>Last Name: </p>
+                    <input type="text" name="l_name"><br>
+                    <p>Notes: </p>
+                    <textarea name="notes" id="desc"></textarea><br>
+                    <input class="submit_it" type="submit" value="Add">
+                </form>
+            </div>
+            <div class="all">
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for author in all_authors %}
+                    <tr>
+                        <td>{{author.id}}</td>
+                        <td>{{author.first_name}} {{author.last_name}}</td>
+                        <td><a href="/author/{{author.id}}">View</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <a id="link_it" href="/">Go to Books...</a>
+            </div>
+        {% endif %}
+    </div>
 </body>
+
 </html>

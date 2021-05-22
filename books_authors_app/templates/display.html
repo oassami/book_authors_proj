@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books & Authors</title>
+</head>
+
+<body>
+    {% if this_book %}
+        <h3>{{this_book.title}}</h3>
+        <p>ID: {{this_book.id}}</p>
+        <p>Description: {{this_book.desc}}</p><br>
+        <p>Authors:</p>
+        <ul>
+            {% for author in the_authors %}
+                <li>{{author.first_name}} {{author.last_name}}</li>
+            {% endfor %}
+        </ul>
+        <form action="/add_auth_book/{{this_book.id}}" method="post">
+            {% csrf_token %}
+            <select name="author">
+                <option value="">- Select an Author -</option>
+                {% for author in remaining_authors %}
+                    <option value="{{author.id}}">{{author.first_name}} {{author.last_name}}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Add">
+        </form>
+        <br><a href="/">Return to Books page</a>
+    {% else %}
+        <h3>{{this_author.first_name}} {{this_author.last_name}}</h3>
+        <p>ID: {{this_author.id}}</p>
+        <p>Notes: {{this_author.notes}}</p><br>
+        <p>Books:</p>
+        <ul>
+            {% for book in the_books %}
+                <li>{{book.title}}</li>
+            {% endfor %}
+        </ul>
+        <form action="/add_book_auth/{{this_author.id}}" method="post">
+            {% csrf_token %}
+            <select name="book">
+                <option value="">- Select a Book -</option>
+                {% for book in all_books %}
+                    <option value="{{book.id}}">{{book.title}}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Add">
+        </form>
+        <br><a href="/authors">Return to Authors page</a>
+    {% endif %}
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+#wrapper{
+    width: 900px;
+    margin: 0px auto;
+}
+h3{
+    width: 300px;
+    /* display: inline-block; */
+}
+.add, .all{
+    width: 300px;
+    display: inline-flex;
+    text-align: center;
+}
+p{
+    width: 100px;
+    display: inline-block;
+}
+#desc{
+    width: 170px;
+    height: 120px;
+}
+.submit_it{
+    padding: 10px;
+    border-radius: 10px;
+}
+table{
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+    border: 2px solid black;
+}
+td, th{
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 10px;
+}
+th{
+    background-color: gray;
+}
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
